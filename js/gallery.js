@@ -69,7 +69,7 @@ const pictures = document.querySelector(".gallery");
 
 pictures.addEventListener("click", e => {
     e.preventDefault();
-    if (e.target === e.currentTarget) return;
+    if (e.target.nodeName !== "IMG") return;
   const imageOriginal = e.target.dataset.source;
   console.log(imageOriginal);
 
