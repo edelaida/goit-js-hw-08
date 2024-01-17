@@ -76,11 +76,27 @@ pictures.addEventListener("click", e => {
 const instance = basicLightbox.create(`
 	<div class="gallery-modal">
  <img class="gallery-bigimg"
-   src="${imageOriginal}" alt=""/>
+   src="${imageOriginal}" alt="${e.target.alt}"/>
  </div>
-`)
+`, {
+  onShow: (instance) => {
+   document.addEventListener('keydown', onModalClose);
+  },
+  onClose: (instance) => {
+   document.removeEventListener('keydown', onModalClose);
+  }  
+})  
   instance.show(); 
+
+  function onModalClose(e) {
+    console.log(e.code);
+    if (e.code === 'Escape') {
+      instance.close();
+    }
+  }
 });
+
+
 
 const galleryActivity = images.map((image) => {
     return `
